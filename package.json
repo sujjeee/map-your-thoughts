@@ -6,15 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "dotenv drizzle-kit generate",
+    "db:introspect": "dotenv drizzle-kit introspect",
+    "db:push": "dotenv drizzle-kit push",
+    "db:studio": "dotenv drizzle-kit studio",
+    "db:seed": "dotenv tsx src/db/seed.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@libsql/client": "^0.7.0",
     "@maptiler/sdk": "^2.2.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv-cli": "^7.4.2",
     "drizzle-orm": "^0.32.0",
     "lucide-react": "^0.414.0",
     "next": "14.2.5",
@@ -33,6 +40,7 @@
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.16.2",
     "typescript": "^5"
   }
 }
