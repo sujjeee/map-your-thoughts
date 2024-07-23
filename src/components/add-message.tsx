@@ -16,7 +16,7 @@ export function AddMessage() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size={"sm"}>
+        <Button variant="outline" size={"icon"}>
           <Plus className="size-4" />
         </Button>
       </DialogTrigger>
