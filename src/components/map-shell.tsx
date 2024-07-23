@@ -3,8 +3,13 @@
 import React from "react"
 import "@maptiler/sdk/dist/maptiler-sdk.css"
 import * as maptilersdk from "@maptiler/sdk"
+import { GetUsersType } from "@/actions/users"
 
-export default function MapShell() {
+interface MapShellProps {
+  users: GetUsersType
+}
+
+export default function MapShell({ users }: MapShellProps) {
   React.useEffect(() => {
     const map = new maptilersdk.Map({
       container: "map",
@@ -13,6 +18,21 @@ export default function MapShell() {
       zoom: 2,
       navigationControl: false,
       geolocateControl: false,
+    })
+
+    users.forEach((user) => {
+      const popupContent = `
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <h3>${user.message}</h3>
+         
+          <p>[${user.country}]</p>
+        </div>
+      `
+
+      new maptilersdk.Marker()
+        .setLngLat([user.longitude, user.latitude] as maptilersdk.LngLatLike)
+        .setPopup(new maptilersdk.Popup().setHTML(popupContent))
+        .addTo(map)
     })
   }, [])
 
