@@ -80,3 +80,7 @@ body,
 #map {
   width: 100%;
 }
+
+.maplibregl-popup-close-button {
+  padding-right: 5px;
+}

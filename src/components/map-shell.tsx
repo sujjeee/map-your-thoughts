@@ -34,7 +34,7 @@ export default function MapShell({ users }: MapShellProps) {
         .setPopup(new maptilersdk.Popup().setHTML(popupContent))
         .addTo(map)
     })
-  }, [])
+  }, [users])
 
   return <div id="map" style={{ width: "100%", height: "100%" }}></div>
 }

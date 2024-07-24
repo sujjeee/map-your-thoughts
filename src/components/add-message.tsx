@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react"
 import {
   Dialog,
@@ -12,10 +14,92 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Info, Plus } from "lucide-react"
 import { DialogClose } from "@radix-ui/react-dialog"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { number, type z } from "zod"
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form"
+import { usersSchema } from "@/db/schemas"
+import { getCountyName } from "@/lib/utils"
+import { addUser } from "@/actions/users"
+import { showErrorToast } from "@/lib/errors"
+import { Icons } from "./icons"
+import { toast } from "sonner"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
+type Inputs = z.infer<typeof usersSchema>
 
 export function AddMessage() {
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+
+  const form = useForm<Inputs>({
+    resolver: zodResolver(usersSchema),
+    defaultValues: {
+      message: "",
+      country: "Unknown",
+      latitude: 1,
+      longitude: 1,
+    },
+  })
+
+  async function onSubmit(data: Inputs) {
+    try {
+      setIsLoading(true)
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const latitude =
+              position.coords.latitude + (Math.random() - 0.5) * 0.005
+            const longitude =
+              position.coords.longitude + (Math.random() - 0.5) * 0.005
+            const county = await getCountyName(latitude, longitude)
+
+            const updatedData = {
+              ...data,
+              latitude,
+              longitude,
+              country: county,
+            }
+
+            const { error } = await addUser(updatedData)
+
+            if (error) throw new Error(error)
+
+            toast("Added new contact address")
+
+            setIsDialogOpen(false)
+            form.reset()
+          },
+          (error) => {
+            console.error("Error getting location:", error)
+            throw error
+          },
+        )
+      } else {
+        console.error("Geolocation is not supported by this browser.")
+        throw new Error("Geolocation is not supported by this browser.")
+      }
+    } catch (error) {
+      showErrorToast(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size={"icon"}>
           <Plus className="size-4" />
@@ -25,21 +109,64 @@ export function AddMessage() {
         <DialogHeader>
           <DialogTitle className=" flex  justify-between w-full">
             Share your thoughts
-            <Info className="size-4 cursor-pointer text-muted-foreground hover:text-accent-foreground active:scale-95" />
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <Info className="size-4 cursor-pointer text-muted-foreground hover:text-accent-foreground active:scale-95" />
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80" align="start">
+                <div className="flex justify-between space-x-4">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">@nextjs</h4>
+                    <p className="text-sm">
+                      The React Framework – created and maintained by @vercel.
+                    </p>
+                    <div className="flex items-center pt-2">
+                      <span className="text-xs text-muted-foreground">
+                        Joined December 2021
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           </DialogTitle>
-          <DialogDescription>
-            Express yourself freely. Share your ideas, stories, or anything on
-            your mind. What are you thinking today?
-          </DialogDescription>
         </DialogHeader>
-        <Textarea rows={10} className="border-2" />
-        <DialogFooter className="w-full flex items-center justify-center gap-1">
+        <Form {...form}>
+          <form>
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      rows={10}
+                      className="border-2"
+                      placeholder="Express yourself freely. Share your ideas, stories, or anything on your mind. What are you thinking today?"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+        <DialogFooter className="w-full flex items-center justify-center gap-3">
           <DialogClose className="w-full">
             <Button type="reset" variant={"outline"} className="w-full">
               Cancel
             </Button>
           </DialogClose>
-          <Button type="button" className="w-full">
+          <Button
+            type="button"
+            onClick={form.handleSubmit(onSubmit)}
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading && (
+              <Icons.spinner className="mr-2 size-4 animate-spin" />
+            )}
             Submit
           </Button>
         </DialogFooter>
