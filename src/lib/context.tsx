@@ -12,9 +12,9 @@ interface LocationContextType {
 }
 
 const initialLocation: LocationProps = {
-  latitude: 0,
-  longitude: 20,
-  zoom: 2,
+  latitude: 15,
+  longitude: 15,
+  zoom: 1.7,
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(

@@ -53,7 +53,8 @@ export default function MapShell({ users }: MapShellProps) {
         mapRef.current.remove()
       }
     }
-  }, [users, location])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [users])
 
   return <div id="map" style={{ width: "100%", height: "100%" }}></div>
 }

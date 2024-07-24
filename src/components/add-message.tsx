@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { usersSchema } from "@/db/schemas"
-import { cn, getCountyName } from "@/lib/utils"
+import { cn, getCountyName, getNewPosition } from "@/lib/utils"
 import { addUser } from "@/actions/users"
 import { showErrorToast } from "@/lib/errors"
 import { Icons } from "./icons"
@@ -43,7 +43,7 @@ type Inputs = z.infer<typeof usersSchema>
 export function AddMessage() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
-  const { location, setLocation } = useLocation()
+  const { setLocation } = useLocation()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(usersSchema),
@@ -63,17 +63,18 @@ export function AddMessage() {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
             console.log({ position })
-            const latitude =
-              position.coords.latitude + (Math.random() - 0.5) * 10
-            const longitude =
-              position.coords.longitude + (Math.random() - 0.5) * 10
-            const county = await getCountyName(latitude, longitude)
+
+            const newPosition = getNewPosition(position, 500)
+            const latitude = newPosition.latitude
+            const longitude = newPosition.longitude
+
+            const country = await getCountyName(latitude, longitude)
 
             const updatedData = {
               ...data,
               latitude,
               longitude,
-              country: county,
+              country,
             }
 
             const { error } = await addUser(updatedData)
