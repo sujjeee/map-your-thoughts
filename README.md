@@ -1,8 +1,7 @@
 # [Map your thoughts](https://map-your-thoughts.vercel.app)
 
-<kbd>
-<!-- video -->
-</kbd>
+https://github.com/user-attachments/assets/9273b9ce-b390-47db-a638-9ecfa73d6828
+
 
 ## Express Yourself Freely
 
