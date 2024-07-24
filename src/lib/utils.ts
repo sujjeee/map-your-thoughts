@@ -16,3 +16,7 @@ export async function getCountyName(lat: number, lon: number): Promise<string> {
     return "Unknown"
   }
 }
+
+export function asleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

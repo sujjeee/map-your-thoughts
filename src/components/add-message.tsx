@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Info, Plus } from "lucide-react"
 import { DialogClose } from "@radix-ui/react-dialog"
@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { usersSchema } from "@/db/schemas"
-import { getCountyName } from "@/lib/utils"
+import { cn, getCountyName } from "@/lib/utils"
 import { addUser } from "@/actions/users"
 import { showErrorToast } from "@/lib/errors"
 import { Icons } from "./icons"
@@ -36,12 +36,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import { useLocation } from "@/lib/context"
 
 type Inputs = z.infer<typeof usersSchema>
 
 export function AddMessage() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+  const { location, setLocation } = useLocation()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(usersSchema),
@@ -60,10 +62,11 @@ export function AddMessage() {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
+            console.log({ position })
             const latitude =
-              position.coords.latitude + (Math.random() - 0.5) * 0.005
+              position.coords.latitude + (Math.random() - 0.5) * 10
             const longitude =
-              position.coords.longitude + (Math.random() - 0.5) * 0.005
+              position.coords.longitude + (Math.random() - 0.5) * 10
             const county = await getCountyName(latitude, longitude)
 
             const updatedData = {
@@ -77,10 +80,13 @@ export function AddMessage() {
 
             if (error) throw new Error(error)
 
-            toast("Added new contact address")
+            toast("Added new message")
+
+            setLocation(updatedData.latitude, updatedData.longitude, 10)
 
             setIsDialogOpen(false)
             form.reset()
+            setIsLoading(false)
           },
           (error) => {
             console.error("Error getting location:", error)
@@ -93,7 +99,6 @@ export function AddMessage() {
       }
     } catch (error) {
       showErrorToast(error)
-    } finally {
       setIsLoading(false)
     }
   }
@@ -153,12 +158,19 @@ export function AddMessage() {
           </form>
         </Form>
         <DialogFooter className="w-full flex items-center justify-center gap-3">
-          <DialogClose className="w-full">
-            <Button type="reset" variant={"outline"} className="w-full">
-              Cancel
-            </Button>
+          <DialogClose
+            className={cn(
+              buttonVariants({
+                variant: "outline",
+                size: "sm",
+                className: "w-full",
+              }),
+            )}
+          >
+            Cancel
           </DialogClose>
           <Button
+            size={"sm"}
             type="button"
             onClick={form.handleSubmit(onSubmit)}
             className="w-full"
