@@ -83,7 +83,7 @@ export function AddMessage() {
 
             toast("Added new message")
 
-            setLocation(updatedData.latitude, updatedData.longitude, 10)
+            setLocation(updatedData.latitude, updatedData.longitude, 20)
 
             setIsDialogOpen(false)
             form.reset()
@@ -114,24 +114,16 @@ export function AddMessage() {
       <DialogContent className=" sm:max-w-[500px]" showClose={false}>
         <DialogHeader>
           <DialogTitle className=" flex  justify-between w-full">
-            Share your thoughts
+            Map your thoughts
             <HoverCard>
               <HoverCardTrigger asChild>
                 <Info className="size-4 cursor-pointer text-muted-foreground hover:text-accent-foreground active:scale-95" />
               </HoverCardTrigger>
               <HoverCardContent className="w-80" align="start">
-                <div className="flex justify-between space-x-4">
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-semibold">@nextjs</h4>
-                    <p className="text-sm">
-                      The React Framework – created and maintained by @vercel.
-                    </p>
-                    <div className="flex items-center pt-2">
-                      <span className="text-xs text-muted-foreground">
-                        Joined December 2021
-                      </span>
-                    </div>
-                  </div>
+                <div className="font-normal text-sm">
+                  Don&#39;t worry, your exact location won&#39;t be disclosed.
+                  We&#39;ll randomize your latitude and longitude within a 500m
+                  to 1000m area to protect your privacy.
                 </div>
               </HoverCardContent>
             </HoverCard>
