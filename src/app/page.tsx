@@ -19,8 +19,8 @@ export default async function Home() {
             className={cn(
               buttonVariants({
                 variant: "outline",
-                size: "icon",
-              }),
+                size: "icon"
+              })
             )}
           >
             <Icons.github className="size-4" />
