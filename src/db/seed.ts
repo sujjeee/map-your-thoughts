@@ -10,9 +10,9 @@ async function seedData() {
         message: faker.lorem.sentence(),
         country: faker.location.country(),
         longitude: faker.location.longitude(),
-        latitude: faker.location.latitude(),
+        latitude: faker.location.latitude()
       })
-    }),
+    })
   )
 
   console.log("Data seeded successfully")

@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -8,35 +8,35 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "@/components/ui/dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Info, Plus } from "lucide-react"
-import { DialogClose } from "@radix-ui/react-dialog"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { DialogClose } from "@radix-ui/react-dialog"
+import { Info, Plus } from "lucide-react"
+import React from "react"
 import { useForm } from "react-hook-form"
 import { number, type z } from "zod"
 
+import { addUser } from "@/actions/users"
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form"
-import { usersSchema } from "@/db/schemas"
-import { cn, getCountyName, getNewPosition } from "@/lib/utils"
-import { addUser } from "@/actions/users"
-import { showErrorToast } from "@/lib/errors"
-import { Icons } from "./icons"
-import { toast } from "sonner"
 import {
   HoverCard,
   HoverCardContent,
-  HoverCardTrigger,
+  HoverCardTrigger
 } from "@/components/ui/hover-card"
+import { usersSchema } from "@/db/schemas"
 import { useLocation } from "@/lib/context"
+import { showErrorToast } from "@/lib/errors"
+import { cn, getCountyName, getNewPosition } from "@/lib/utils"
+import { toast } from "sonner"
+import { Icons } from "./icons"
 
 type Inputs = z.infer<typeof usersSchema>
 
@@ -51,8 +51,8 @@ export function AddMessage() {
       message: "",
       country: "Unknown",
       latitude: 1,
-      longitude: 1,
-    },
+      longitude: 1
+    }
   })
 
   async function onSubmit(data: Inputs) {
@@ -74,7 +74,7 @@ export function AddMessage() {
               ...data,
               latitude,
               longitude,
-              country,
+              country
             }
 
             const { error } = await addUser(updatedData)
@@ -92,7 +92,7 @@ export function AddMessage() {
           (error) => {
             console.error("Error getting location:", error)
             throw error
-          },
+          }
         )
       } else {
         console.error("Geolocation is not supported by this browser.")
@@ -156,8 +156,8 @@ export function AddMessage() {
               buttonVariants({
                 variant: "outline",
                 size: "sm",
-                className: "w-full",
-              }),
+                className: "w-full"
+              })
             )}
           >
             Cancel

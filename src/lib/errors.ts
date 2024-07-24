@@ -22,6 +22,6 @@ export function showErrorToast(err: unknown) {
 export function catchError(err: unknown) {
   return {
     data: null,
-    error: getErrorMessage(err),
+    error: getErrorMessage(err)
   }
 }
