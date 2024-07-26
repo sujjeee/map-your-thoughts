@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/libsql"
 
 const client = createClient({
   url: process.env.DATABASE_URL!,
-  authToken: process.env.DATABASE_AUTH_TOKEN!
+  authToken: process.env.DATABASE_AUTH_TOKEN!,
 })
 
 import * as schema from "./schemas"

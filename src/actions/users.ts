@@ -6,7 +6,7 @@ import { catchError } from "@/lib/errors"
 import {
   unstable_cache as cache,
   revalidatePath,
-  revalidateTag
+  revalidateTag,
 } from "next/cache"
 import { z } from "zod"
 
@@ -22,8 +22,8 @@ export async function getUsers() {
       ["getUsers"],
       {
         tags: ["getUsers"],
-        revalidate: 86400
-      }
+        revalidate: 86400,
+      },
     )()
   } catch (error) {
     return []
@@ -35,7 +35,7 @@ export type GetUsersType = Awaited<ReturnType<typeof getUsers>>
 export async function addUser(rawInput: z.infer<typeof usersSchema>) {
   try {
     await db.insert(users).values({
-      ...rawInput
+      ...rawInput,
     })
 
     revalidateTag("getUsers")
@@ -43,7 +43,7 @@ export async function addUser(rawInput: z.infer<typeof usersSchema>) {
 
     return {
       data: null,
-      error: null
+      error: null,
     }
   } catch (error) {
     return catchError(error)

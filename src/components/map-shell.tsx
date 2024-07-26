@@ -22,7 +22,7 @@ export default function MapShell({ users }: MapShellProps) {
       center: [0, 20],
       zoom: 2,
       navigationControl: false,
-      geolocateControl: false
+      geolocateControl: false,
     })
 
     mapRef.current = map
@@ -45,7 +45,7 @@ export default function MapShell({ users }: MapShellProps) {
     map.flyTo({
       center: [location.longitude, location.latitude],
       zoom: location.zoom,
-      essential: true
+      essential: true,
     })
 
     return () => {

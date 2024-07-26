@@ -9,6 +9,12 @@ export function getErrorMessage(err: unknown) {
     return errors.join("\n")
   } else if (err instanceof Error) {
     return err.message
+  } else if (err instanceof GeolocationPositionError) {
+    if (err.code === 1) {
+      return "Permission denied. Please give permission."
+    } else {
+      return err.message
+    }
   } else {
     return "Something went wrong. Please try again later."
   }
@@ -22,6 +28,6 @@ export function showErrorToast(err: unknown) {
 export function catchError(err: unknown) {
   return {
     data: null,
-    error: getErrorMessage(err)
+    error: getErrorMessage(err),
   }
 }

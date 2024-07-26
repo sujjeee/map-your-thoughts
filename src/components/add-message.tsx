@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -24,12 +24,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form"
 import {
   HoverCard,
   HoverCardContent,
-  HoverCardTrigger
+  HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import { usersSchema } from "@/db/schemas"
 import { useLocation } from "@/lib/context"
@@ -51,8 +51,8 @@ export function AddMessage() {
       message: "",
       country: "Unknown",
       latitude: 1,
-      longitude: 1
-    }
+      longitude: 1,
+    },
   })
 
   async function onSubmit(data: Inputs) {
@@ -74,14 +74,13 @@ export function AddMessage() {
               ...data,
               latitude,
               longitude,
-              country
+              country,
             }
 
             const { error } = await addUser(updatedData)
-
             if (error) throw new Error(error)
 
-            toast("Added new message")
+            toast("Thanks for sharing 🎉!")
 
             setLocation(updatedData.latitude, updatedData.longitude, 20)
 
@@ -90,9 +89,9 @@ export function AddMessage() {
             setIsLoading(false)
           },
           (error) => {
-            console.error("Error getting location:", error)
-            throw error
-          }
+            showErrorToast(error)
+            setIsLoading(false)
+          },
         )
       } else {
         console.error("Geolocation is not supported by this browser.")
@@ -156,8 +155,8 @@ export function AddMessage() {
               buttonVariants({
                 variant: "outline",
                 size: "sm",
-                className: "w-full"
-              })
+                className: "w-full",
+              }),
             )}
           >
             Cancel

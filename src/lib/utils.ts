@@ -36,7 +36,7 @@ interface NewPosition {
 // Source: ChatGPT
 export function getNewPosition(
   currentPosition: Position,
-  distance: number
+  distance: number,
 ): NewPosition {
   const latitude = currentPosition.coords.latitude
   const longitude = currentPosition.coords.longitude
@@ -53,14 +53,14 @@ export function getNewPosition(
 
   const newLat = Math.asin(
     Math.sin(latRad) * Math.cos(distance / earthRadius) +
-      Math.cos(latRad) * Math.sin(distance / earthRadius) * Math.cos(bearing)
+      Math.cos(latRad) * Math.sin(distance / earthRadius) * Math.cos(bearing),
   )
 
   const newLon =
     lonRad +
     Math.atan2(
       Math.sin(bearing) * Math.sin(distance / earthRadius) * Math.cos(latRad),
-      Math.cos(distance / earthRadius) - Math.sin(latRad) * Math.sin(newLat)
+      Math.cos(distance / earthRadius) - Math.sin(latRad) * Math.sin(newLat),
     )
 
   // Convert back to degrees
@@ -69,6 +69,6 @@ export function getNewPosition(
 
   return {
     latitude: newLatitude,
-    longitude: newLongitude
+    longitude: newLongitude,
   }
 }

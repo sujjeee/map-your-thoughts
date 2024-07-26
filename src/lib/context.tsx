@@ -14,15 +14,15 @@ interface LocationContextType {
 const initialLocation: LocationProps = {
   latitude: 15,
   longitude: 15,
-  zoom: 1.7
+  zoom: 1.7,
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(
-  undefined
+  undefined,
 )
 
 export const LocationProvider = ({
-  children
+  children,
 }: {
   children: React.ReactNode
 }) => {
@@ -31,7 +31,7 @@ export const LocationProvider = ({
   const setLocationData = (
     latitude: number,
     longitude: number,
-    zoom: number
+    zoom: number,
   ) => {
     setLocation({ latitude, longitude, zoom })
   }
@@ -40,7 +40,7 @@ export const LocationProvider = ({
     <LocationContext.Provider
       value={{
         location,
-        setLocation: setLocationData
+        setLocation: setLocationData,
       }}
     >
       {children}

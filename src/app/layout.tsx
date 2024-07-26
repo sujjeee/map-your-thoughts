@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "anonymous social media",
     "anonymous share",
     "maps",
-    "sujjeeee"
+    "sujjeeee",
   ],
   openGraph: {
     title: "Share your ideas, stories, or anything on your mind.",
@@ -26,19 +26,19 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://map-your-thoughts.vercel.app/opengraph-image.png",
-        alt: "Share your ideas, stories, or anything on your mind."
-      }
-    ]
+        alt: "Share your ideas, stories, or anything on your mind.",
+      },
+    ],
   },
   twitter: {
     site: "@sujjeee",
     images: [
       {
         url: "https://map-your-thoughts.vercel.app/opengraph-image.png",
-        alt: "Share your ideas, stories, or anything on your mind."
-      }
-    ]
-  }
+        alt: "Share your ideas, stories, or anything on your mind.",
+      },
+    ],
+  },
 }
 
 export async function generateViewport() {
@@ -46,12 +46,12 @@ export async function generateViewport() {
     width: "device-width",
     initialScale: 1.0,
     maximumScale: 1.0,
-    userScalable: false
+    userScalable: false,
   }
 }
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
