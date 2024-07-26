@@ -5,6 +5,7 @@ import * as maptilersdk from "@maptiler/sdk"
 import React, { useRef, useEffect } from "react"
 import "@maptiler/sdk/dist/maptiler-sdk.css"
 import { useLocation } from "@/lib/context"
+import { getTagColor, Tag } from "@/lib/constants"
 
 interface MapShellProps {
   users: GetUsersType
@@ -36,7 +37,9 @@ export default function MapShell({ users }: MapShellProps) {
         </div>
       `
 
-      new maptilersdk.Marker()
+      new maptilersdk.Marker({
+        color: getTagColor(user.tag as Tag),
+      })
         .setLngLat([user.longitude, user.latitude] as maptilersdk.LngLatLike)
         .setPopup(new maptilersdk.Popup().setHTML(popupContent))
         .addTo(map)

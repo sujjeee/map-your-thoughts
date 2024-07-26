@@ -1,6 +1,9 @@
+import { tagColorMap } from "@/lib/constants"
 import { sql } from "drizzle-orm"
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 import { createInsertSchema } from "drizzle-zod"
+
+const tagKeys = Object.keys(tagColorMap) as [string, ...string[]]
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey().notNull(),
@@ -9,6 +12,7 @@ export const users = sqliteTable("users", {
   longitude: real("longitude").notNull(),
   latitude: real("latitude").notNull(),
   timestamp: text("timestamp").default(sql`CURRENT_TIMESTAMP`),
+  tag: text("tag", { enum: tagKeys }),
 })
 
 const baseUsersSchema = createInsertSchema(users)
