@@ -1,78 +1,69 @@
 import React from "react"
 
 export const tagColorMap = {
-  "Politics & History": "#8B0000", // Dark Red
-  "Culture & Society": "#FFA500", // Orange
-  "Nature & Environment": "#228B22", // Forest Green
-  "Cooking & Recipes": "#FFD700", // Gold
-  "Technology & Gadgets": "#1E90FF", // Dodger Blue
-  "Startups & Entrepreneurship": "#32CD32", // Lime Green
-  "Marketing & Branding": "#FF69B4", // Hot Pink
-  "Productivity & Time Management": "#8A2BE2", // Blue Violet
-  "Self-Care & Mindfulness": "#7FFF00", // Chartreuse
-  "Travel & Adventure": "#FFA500", // Orange
-  "Outdoor Activities": "#2E8B57", // Sea Green
-  "Urban vs Rural Living": "#D2691E", // Chocolate
-  "Home & Interior Design": "#FF6347", // Tomato
-  "Sustainability & Eco-Friendly Living": "#3CB371", // Medium Sea Green
-  "Wildlife & Conservation": "#228B22", // Forest Green
-  "Astronomy & Space": "#191970", // Midnight Blue
-  "Beauty & Cosmetics": "#FF69B4", // Hot Pink
-  "Arts & Crafts": "#FF1493", // Deep Pink
-  "Music & Audio": "#FF4500", // Orange Red
-  "Film & Television": "#FFD700", // Gold
-  "Anime & Manga": "#FF6347", // Tomato
-  "Comics & Graphic Novels": "#FF4500", // Orange Red
-  "Programming & Development": "#00FFFF", // Cyan
-  "Artificial Intelligence & Machine Learning": "#32CD32", // Lime Green
-  "Blockchain & Cryptocurrency": "#FFD700", // Gold
-  "Virtual & Augmented Reality": "#FF69B4", // Hot Pink
-  "E-commerce & Online Business": "#8A2BE2", // Blue Violet
-  "Social Media & Digital Marketing": "#FF1493", // Deep Pink
-  "Writing & Literature": "#7FFF00", // Chartreuse
-  "Language & Linguistics": "#3CB371", // Medium Sea Green
-  "Education & Learning": "#FFD700", // Gold
-  "Academic Life": "#FF6347", // Tomato
-  "Scholarships & Financial Aid": "#1E90FF", // Dodger Blue
-  "Volunteering & Philanthropy": "#32CD32", // Lime Green
-  "Events & Festivals": "#FF69B4", // Hot Pink
-  "Career Development": "#8A2BE2", // Blue Violet
-  "Personal Finance & Investing": "#FF4500", // Orange Red
-  "Real Estate & Property": "#FFD700", // Gold
-  "Automotive & Transportation": "#1E90FF", // Dodger Blue
-  "Public Speaking & Communication": "#32CD32", // Lime Green
-  "Healthcare & Medicine": "#FF69B4", // Hot Pink
-  "Lifestyle & Wellness": "#8A2BE2", // Blue Violet
-  "News & Current Affairs": "#FF1493", // Deep Pink
-  "Business & Economics": "#7FFF00", // Chartreuse
-  "Scientific Research": "#3CB371", // Medium Sea Green
-  "Sports & Athletics": "#FFD700", // Gold
-  "Visual Arts": "#FF6347", // Tomato
-  "Fashion & Style": "#FF4500", // Orange Red
-  "DIY & Maker Culture": "#00FFFF", // Cyan
-  "Photography & Videography": "#1E90FF", // Dodger Blue
-  "Gaming & Esports": "#32CD32", // Lime Green
-  "Relationships & Dating": "#FF69B4", // Hot Pink
-  "Mental Health & Psychology": "#8A2BE2", // Blue Violet
-  "Fitness & Exercise": "#FF1493", // Deep Pink
-  "Parenting & Family": "#7FFF00", // Chartreuse
-  "Pets & Animal Care": "#3CB371", // Medium Sea Green
-  "Personal Growth & Motivation": "#FFD700", // Gold
-  "Humor & Entertainment": "#FF6347", // Tomato
-  "Spirituality & Religion": "#FF4500", // Orange Red
-  "Food & Culinary Arts": "#FFD700", // Gold
-  "Gardening & Horticulture": "#228B22", // Forest Green
-  "Architecture & Urban Planning": "#1E90FF", // Dodger Blue
-  "Climate Change & Environmental Issues": "#32CD32", // Lime Green
-  "Robotics & Automation": "#FF69B4", // Hot Pink
-  "Cybersecurity & Privacy": "#8A2BE2", // Blue Violet
-  "Renewable Energy": "#FF1493", // Deep Pink
-  "Biotechnology & Genetics": "#7FFF00", // Chartreuse
-  "Sociology & Anthropology": "#3CB371", // Medium Sea Green
-  "Philosophy & Ethics": "#FFD700", // Gold
-  "Law & Legal Issues": "#FF6347", // Tomato
-  other: "#3FB1CE", // White
-} as const
+  Politics: "#8B0000",
+  Society: "#FFA500",
+  Nature: "#228B22",
+  Cooking: "#FFD700",
+  Technology: "#1E90FF",
+  Startups: "#32CD32",
+  Marketing: "#FF69B4",
+  Productivity: "#8A2BE2",
+  Mindfulness: "#7FFF00",
+  Travel: "#D2691E",
+  Home: "#FF6347",
+  Sustainability: "#3CB371",
+  Space: "#191970",
+  Beauty: "#FF1493",
+  Arts: "#FF4500",
+  Music: "#E6E6FA",
+  Film: "#BDB76B",
+  Anime: "#20B2AA",
+  Comics: "#B22222",
+  Programming: "#6d28d9",
+  AI: "#9ACD32",
+  Blockchain: "#DAA520",
+  VR: "#FF00FF",
+  Ecommerce: "#4B0082",
+  Writing: "#00FF7F",
+  Language: "#6495ED",
+  Education: "#DDA0DD",
+  Volunteering: "#00CED1",
+  Career: "#FF8C00",
+  Finance: "#8B008B",
+  Automotive: "#556B2F",
+  Communication: "#8FBC8F",
+  Healthcare: "#483D8B",
+  Lifestyle: "#2F4F4F",
+  News: "#00BFFF",
+  Business: "#A0522D",
+  Science: "#C71585",
+  Sports: "#F4A460",
+  Fashion: "#CD5C5C",
+  DIY: "#4682B4",
+  Photography: "#D2691E",
+  Gaming: "#9932CC",
+  Relationships: "#8B4513",
+  Psychology: "#E9967A",
+  Fitness: "#F0E68C",
+  Parenting: "#48D1CC",
+  Pets: "#DEB887",
+  Motivation: "#5F9EA0",
+  Humor: "#D8BFD8",
+  Spirituality: "#DC143C",
+  Food: "#DA70D6",
+  Gardening: "#DB7093",
+  Architecture: "#F08080",
+  Climate: "#3CB371",
+  Robotics: "#FFA07A",
+  Cybersecurity: "#20B2AA",
+  Energy: "#87CEFA",
+  Biotech: "#778899",
+  Sociology: "#B0C4DE",
+  Philosophy: "#FFDAB9",
+  Law: "#D3D3D3",
+  Other: "#3FB1CE",
+}
 
 export type Tag = keyof typeof tagColorMap
 
