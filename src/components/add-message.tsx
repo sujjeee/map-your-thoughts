@@ -4,13 +4,13 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { Info, Plus } from "lucide-react"
@@ -37,6 +37,21 @@ import { showErrorToast } from "@/lib/errors"
 import { cn, getCountyName, getNewPosition } from "@/lib/utils"
 import { toast } from "sonner"
 import { Icons } from "./icons"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { tagColorMap } from "@/lib/constants"
+import { ScrollArea } from "./ui/scroll-area"
 
 type Inputs = z.infer<typeof usersSchema>
 
@@ -50,6 +65,7 @@ export function AddMessage() {
     defaultValues: {
       message: "",
       country: "Unknown",
+
       latitude: 1,
       longitude: 1,
     },
@@ -129,7 +145,75 @@ export function AddMessage() {
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form>
+          <form className="flex flex-col gap-2">
+            <FormField
+              control={form.control}
+              name="tag"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn(
+                            " justify-between w-full",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          {field.value
+                            ? Object.keys(tagColorMap).find(
+                                (tag) => tag === field.value,
+                              )
+                            : "Select a tag"}
+                          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-full p-0"
+                      align="start"
+                      sideOffset={0}
+                    >
+                      <Command>
+                        <CommandInput
+                          placeholder="Search tags..."
+                          className="h-9"
+                        />
+                        <CommandList className="hide_scrollbar">
+                          <ScrollArea className="h-96">
+                            <CommandEmpty>No tag found.</CommandEmpty>
+                            <CommandGroup>
+                              {Object.keys(tagColorMap).map((tag) => (
+                                <CommandItem
+                                  value={tag}
+                                  key={tag}
+                                  onSelect={() => {
+                                    form.setValue("tag", tag)
+                                  }}
+                                >
+                                  {tag}
+                                  <CheckIcon
+                                    className={cn(
+                                      "ml-auto h-4 w-4",
+                                      tag === field.value
+                                        ? "opacity-100"
+                                        : "opacity-0",
+                                    )}
+                                  />
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </ScrollArea>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="message"
@@ -138,7 +222,6 @@ export function AddMessage() {
                   <FormControl>
                     <Textarea
                       rows={10}
-                      className="border-2"
                       placeholder="Express yourself freely. Share your ideas, stories, or anything on your mind. What are you thinking today?"
                       {...field}
                     />

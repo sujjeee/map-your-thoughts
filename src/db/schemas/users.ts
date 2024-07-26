@@ -2,6 +2,7 @@ import { tagColorMap } from "@/lib/constants"
 import { sql } from "drizzle-orm"
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 import { createInsertSchema } from "drizzle-zod"
+import { z } from "zod"
 
 const tagKeys = Object.keys(tagColorMap) as [string, ...string[]]
 
@@ -25,4 +26,7 @@ export const usersSchema = baseUsersSchema.extend({
   ),
   latitude: baseUsersSchema.shape.latitude.min(1, "Invalid latitude"),
   longitude: baseUsersSchema.shape.longitude.min(1, "Invalid longitude "),
+  tag: z.enum(tagKeys, {
+    message: "Please select a tag",
+  }),
 })
