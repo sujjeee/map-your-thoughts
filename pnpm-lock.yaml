@@ -54,11 +54,11 @@ importers:
         specifier: ^7.4.2
         version: 7.4.2
       drizzle-orm:
-        specifier: ^0.32.0
-        version: 0.32.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1)
+        specifier: ^0.33.0
+        version: 0.33.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1)
       drizzle-zod:
         specifier: ^0.5.1
-        version: 0.5.1(drizzle-orm@0.32.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1))(zod@3.23.8)
+        version: 0.5.1(drizzle-orm@0.33.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1))(zod@3.23.8)
       lucide-react:
         specifier: ^0.414.0
         version: 0.414.0(react@18.3.1)
@@ -1366,8 +1366,8 @@ packages:
     resolution: {integrity: sha512-w9jE97z193dd4jzAyj4Uv2SOh8Ydue70Ki6W0awy4bGM1aPXan6zD6Yv+nNTA6oGgNTDl2MJFxutjHG4fden5g==}
     hasBin: true
 
-  drizzle-orm@0.32.0:
-    resolution: {integrity: sha512-99IlfVGPNHzOFEXo9Phyu5At5TALLsY2t6WxFFy68rYd9Ej4cHX/7WjdPOn7JNRW69MNeNtP8XrDQg43SppuAA==}
+  drizzle-orm@0.33.0:
+    resolution: {integrity: sha512-SHy72R2Rdkz0LEq0PSG/IdvnT3nGiWuRk+2tXZQ90GVq/XQhpCzu/EFT3V2rox+w8MlkBQxifF8pCStNYnERfA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -3180,15 +3180,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.32.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1):
+  drizzle-orm@0.33.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1):
     optionalDependencies:
       '@libsql/client': 0.7.0
       '@types/react': 18.3.4
       react: 18.3.1
 
-  drizzle-zod@0.5.1(drizzle-orm@0.32.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1))(zod@3.23.8):
+  drizzle-zod@0.5.1(drizzle-orm@0.33.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1))(zod@3.23.8):
     dependencies:
-      drizzle-orm: 0.32.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1)
+      drizzle-orm: 0.33.0(@libsql/client@0.7.0)(@types/react@18.3.4)(react@18.3.1)
       zod: 3.23.8
 
   earcut@2.2.4: {}
